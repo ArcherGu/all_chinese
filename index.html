@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Chinese</title>
+</head>
+
+<body>
+    <canvas width="255px" height="255px" id="multiple"></canvas>
+    <canvas width="255px" height="255px" id="single"></canvas>
+
+    <script>
+        var multiple = document.getElementById("multiple");
+        var mctx = multiple.getContext("2d");
+        mctx.fillStyle = "black";
+        mctx.globalAlpha = 0.3;
+        mctx.font = "200px 宋体";
+
+        var single = document.getElementById("single");
+        var sctx = single.getContext("2d");
+        sctx.fillStyle = "black";
+        sctx.font = "200px 宋体";
+
+        var i = 0x4e00;
+        var render = function () {
+            i++;
+
+            mctx.fillText(String.fromCharCode(i), 0, 200);
+
+            sctx.clearRect(0,0,single.width,single.height); 
+            sctx.fillText(String.fromCharCode(i), 0, 200);
+
+            if (i >= 0x9ff0) {
+                clearInterval(intervalId);
+            }
+        }
+
+        var intervalId = setInterval(render, 100);
+    </script>
+</body>
+
+</html>
